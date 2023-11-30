@@ -1,9 +1,8 @@
 type Suit = 'P' | 'C' | 'R' | 'T';  // Picas, Corazones, Rombos, Tréboles
 type Value = 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14;  // 2-10, J, Q, K, A
 type DeckColor = 'R' | 'B';  // Rojo y Azul
-
 export class Card {
-    constructor(public suit: Suit, public value: Value, public color: DeckColor) {}
+    constructor(public suit: string, public value: number, public color: string, public isFaceUp: boolean = false) {}
 }
 
 export class Deck {
@@ -35,11 +34,15 @@ export class Deck {
         return this.cards.splice(randomIndex, 1)[0];
     }
 
+    shuffleDeck() {
+        for (let i = this.cards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+        }
+    }
     getCards() {
         return this.cards;
     }
-
-   
 }
 
 
